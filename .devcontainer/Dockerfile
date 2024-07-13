@@ -1,0 +1,12 @@
+FROM mcr.microsoft.com/devcontainers/base:ubuntu
+USER vscode
+WORKDIR /home/vscode
+ENV MODULAR_HOME=/home/vscode/.modular
+ENV MOJO_PATH="$MODULAR_HOME/pkg/packages.modular.com_mojo"
+ENV PATH="$MOJO_PATH/bin:$PATH"
+RUN sudo apt-get update
+RUN sudo apt-get install -y fish
+RUN sudo apt-get install -y clang
+RUN curl -s https://get.modular.com | sh -
+RUN modular install mojo
+RUN python3 -m pip install jupyter
